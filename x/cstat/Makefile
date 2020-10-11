@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-TARGETS := tabstat
+TARGETS := tabstat size
 
 .PHONY: all
 all: $(TARGETS)
