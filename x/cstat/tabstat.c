@@ -43,5 +43,6 @@ int main(int argc, char *argv[]) {
   }
   clock_t end = clock();
   double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-  printf("%d stat calls in %f (%f per op)\n", i, time_spent, time_spent / i);
+  fprintf(stderr, "%d stat calls in %f (%f per op)\n", i, time_spent,
+          time_spent / i);
 }
