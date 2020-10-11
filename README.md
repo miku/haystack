@@ -72,3 +72,17 @@ metadata was the limiting factor for our read throughput.
 * Simple.
 
 ## seaweedfs
+
+* is an open source project inspired by the haystack paper
+
+Goals:
+
+* store billions of files
+* serve files fast
+
+Basic notions:
+
+* master server (not metadata, just volumes)
+* volume server (metadata)
+
+Metadata overhead for each file is 40 bytes.
