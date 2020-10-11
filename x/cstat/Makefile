@@ -8,6 +8,9 @@ all: $(TARGETS)
 	clang-format --style Google -i $^
 	CFLAGS=-D_POSIX_C_SOURCE cc -o $@ $^
 
+valgrind: all
+	valgrind --leak-check=yes ./tabstat
+
 .PHONY: clean
 clean:
 	rm -f $(TARGETS)
