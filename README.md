@@ -86,3 +86,12 @@ Basic notions:
 * volume server (metadata)
 
 Metadata overhead for each file is 40 bytes.
+
+* erasure coding (FEC)
+
+Layers
+
+* blobs
+* filer (for files and directories)
+* S3, hadoop
+* replication
