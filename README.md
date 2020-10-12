@@ -73,7 +73,12 @@ throughput.
   Std
 1003.1-2017](https://pubs.opengroup.org/onlinepubs/9699919799/functions/stat.html)
 
-How fast is is really?
+How fast is it, [really](x/cstat)?
+
+```shell
+$ tabstat
+728 stat calls in 0.002804 (0.000004 per op)
+```
 
 > in the range 3-150 microseconds, probably, depending on file system cache
 
