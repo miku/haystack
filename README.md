@@ -24,6 +24,11 @@ That is (very) roughly what you would pay for S3 cloud data storage, for a
 month (assuming
 [$32.76/TB/month](https://wasabi.com/blog/on-premises-vs-cloud-storage/) S3).
 
+The support paid by the German Government for a single company,
+[TUI](https://www.tagesschau.de/wirtschaft/tui-milliardenhilfe-101.html), 1.8B,
+could pay for: 15 Exabyte of triple replicated storage, or 187GB per person
+(de).
+
 ----
 
 ## Why?
