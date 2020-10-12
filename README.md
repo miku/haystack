@@ -4,7 +4,7 @@ FB published the design of their object store in 2010:
 
 > [Finding a needle in Haystack: Facebook’s photo storage](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/Beaver.pdf)
 
-At that time, FB stored 260B images, or 20PB. 60TB new images per day. This
+At that time, FB stored 260B images, or 20PB. 60TB new images per week. This
 short talk is about the design and about an open source implementation
 [seaweedfs](https://github.com/chrislusf/seaweedfs).
 
