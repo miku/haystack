@@ -8,6 +8,22 @@ At that time, FB stored 260B images, or 20PB. 60TB new images per day. This
 short talk is about the design and about an open source implementation
 [seaweedfs](https://github.com/chrislusf/seaweedfs).
 
+----
+
+Sidenote: What does a PB of disk space cost today?
+
+The [Helios 64](https://wiki.kobol.io/helios64/intro/) ARM NAS has 5 SATA
+ports, maybe around EUR 3K for 80TB. 13 such devices would give yield a PB of
+storage (unreplicated), so roughly EUR 40K. Replicating FB 2010 photo storage
+(20PB) three times (60PB) using low end appliances (ARM, sata) would cost EUR
+2.4M today.
+
+That is (very) roughly what you would pay for S3 cloud data storage, for a
+month (assuming
+[$32.76/TB/month](https://wasabi.com/blog/on-premises-vs-cloud-storage/) S3).
+
+----
+
 ## Why?
 
 * we used [minio](https://github.com/minio/minio) as a KVS with an S3 API and
