@@ -81,6 +81,8 @@ $ tabstat
 ```
 
 > in the range 3-150 microseconds, probably, depending on file system cache
+> (that's like [sending 1K over
+> 1Gbps](https://gist.github.com/jboner/2841832#file-latency-txt-L9))
 
 ### FB use case (2010)
 
