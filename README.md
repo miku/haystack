@@ -18,6 +18,8 @@ storage (unreplicated), so roughly EUR 40K. Replicating FB 2010 photo storage
 (20PB) three times (60PB) using low end appliances (ARM, sata) would cost EUR
 2.4M today.
 
+![](static/assembly_pic13.png)
+
 That is (very) roughly what you would pay for S3 cloud data storage, for a
 month (assuming
 [$32.76/TB/month](https://wasabi.com/blog/on-premises-vs-cloud-storage/) S3).
