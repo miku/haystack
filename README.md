@@ -14,7 +14,7 @@ short talk is about the design and about an open source implementation
 
 Sidenote: What does a PB of disk space cost today?
 
-The [Helios 64](https://wiki.kobol.io/helios64/intro/) ARM NAS has 5 SATA
+The [Helios 64 ARM NAS](https://wiki.kobol.io/helios64/intro/) has 5 SATA
 ports, maybe around EUR 3K for 80TB. 13 such devices would give yield a PB of
 storage (unreplicated), so roughly EUR 40K. Replicating FB 2010 photo storage
 (20PB) three times (60PB) using low end appliances (ARM, sata) would cost EUR
