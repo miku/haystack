@@ -8,7 +8,32 @@ At that time, FB stored 260B images, or 20PB. 60TB new images per day. This
 short talk is about the design and about an open source implementation
 [seaweedfs](https://github.com/chrislusf/seaweedfs).
 
-## Finding a needle in Haystack: Facebook’s photo storage
+## Why?
+
+* we used [minio](https://github.com/minio/minio) as a KVS with an S3 API and
+  inserts got very slow after around 80-100M keys (it probably was the ext fs)
+* we looked for alternatives, that could be deployed quickly, found seeweedfs,
+  tested it and deployed it
+
+It is live and serving thumbnails:
+
+![](https://blobs.fatcat.wiki/thumbnail/pdf/4f/06/4f06e3c755776ff2fed8bdf9e533737989c9912e.180px.jpg)
+
+Currently running on a single server:
+
+```
+$ /usr/local/bin/weed server -dir /srv/seaweedfs/data -s3 -s3.port 8333 \
+    -volume.max 0 -volume.index=leveldb2 -volume.port 8380 \
+    -master.port 9333 -master.volumeSizeLimitMB 250000 \
+    -filer no \
+    -whiteList 127.0.0.1
+```
+
+* around 3TB data, 113 volumes, X objects in Y buckets (TODO)
+
+A short summary of the paper and an overview of the implementation.
+
+# Finding a needle in Haystack: Facebook’s photo storage
 
 > Our key observation is that this traditional
 design incurs an excessive number of disk operations because of metadata
