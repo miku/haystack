@@ -17,7 +17,7 @@ short talk is about the design and about an open source implementation
 
 It is live and serving thumbnails:
 
-![](https://blobs.fatcat.wiki/thumbnail/pdf/4f/06/4f06e3c755776ff2fed8bdf9e533737989c9912e.180px.jpg)
+[![](https://blobs.fatcat.wiki/thumbnail/pdf/4f/06/4f06e3c755776ff2fed8bdf9e533737989c9912e.180px.jpg)](https://scholar-qa.archive.org/)
 
 Currently running on a single server:
 
