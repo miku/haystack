@@ -8,6 +8,8 @@ At that time, FB stored 260B images, or 20PB. 60TB new images per week. This
 short talk is about the design and about an open source implementation
 [seaweedfs](https://github.com/chrislusf/seaweedfs).
 
+![](static/ocean.jpg)
+
 ----
 
 Sidenote: What does a PB of disk space cost today?
