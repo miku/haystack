@@ -134,8 +134,8 @@ metadata was the limiting factor for our read throughput.
 
 Goals:
 
-* store billions of files
-* serve files fast
+* **store** billions of files
+* **serve** files fast
 
 Basic notions:
 
