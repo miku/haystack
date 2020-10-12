@@ -61,8 +61,8 @@ A short summary of the paper and an overview of the implementation.
 # Finding a needle in Haystack: Facebook’s photo storage
 
 > Our key observation is that this traditional
-design incurs an excessive number of disk operations because of metadata
-lookups. [...] We carefully reduce this per photo metadata so that Haystack
+design incurs an **excessive number of disk operations because of metadata
+lookups**. [...] We carefully reduce this per photo metadata so that Haystack
 storage machines can perform all metadata lookups in main memory. This choice
 conserves disk operations for reading actual data and thus increases overall
 throughput.
