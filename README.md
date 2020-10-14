@@ -54,7 +54,8 @@ $ /usr/local/bin/weed server -dir /srv/seaweedfs/data -s3 -s3.port 8333 \
     -whiteList 127.0.0.1
 ```
 
-* around 3TB data, 113 volumes, X objects in Y buckets (TODO)
+* around 3TB data (0.015% of 2010 FB photo storage), 113 volumes, X objects in
+  Y buckets (TODO)
 
 A short summary of the paper and an overview of the implementation.
 
