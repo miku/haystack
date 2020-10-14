@@ -112,7 +112,7 @@ or your native CPU word size - even though it mostly (boolean) flags.
 
 That's about 15G/week only for the perms, which the paper says they did not
 need (total stat size would be 500G/week, file metadata amounted for about 1%
-of storage size).
+of storage size; stat struct in total was [144b](https://github.com/miku/haystack/blob/9b9ffabac5c9dd5e6f92ed7a8943fa5f65e69ddc/x/cstat/size.c#L1)).
 
 ### How many ops per photo?
 
