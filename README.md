@@ -1,5 +1,9 @@
 # Haystack Object Storage and Go Implementation
 
+> Short Talk as Gophers Leipzig, 2020-10-16, 1900 CEST (remote)
+
+----
+
 FB published the design of their object store in 2010:
 
 > [Finding a needle in Haystack: Facebook’s photo storage](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/Beaver.pdf)
