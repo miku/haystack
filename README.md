@@ -8,6 +8,44 @@ At that time, FB stored 260B images, or 20PB. 60TB new images per week. This
 short talk is about the design and about an open source implementation
 [seaweedfs](https://github.com/chrislusf/seaweedfs).
 
+Move fast and build new storage systems every N years:
+
+* **NFS** (2004-2008)
+
+> Our NFS-based design stores each photo in its own
+file on a set of commercial NAS appliances.
+
+> We initially stored thousands of files in each directory
+of an NFS volume which led to an excessive number of disk operations to read
+even a single image (more than 10 disk ops to retrieve an image; md not cached by appliance).
+
+> Reduced number of files to 100s per directory, metadata situation got better (3 disk ops).
+
+They added a custom system call to the kernel.
+
+> `open_by_filehandle`, that we added to the kernel (but did not help much)
+
+* **Haystack** (2007-20XX)
+* [Warm BLOB](https://www.usenix.org/system/files/conference/osdi14/osdi14-paper-muralidhar.pdf) (20XX-20XX)
+
+> As the footprint of BLOBs increases, storing them in
+our traditional storage system, **Haystack** (in prod for 7 year in 2014), is
+becoming increasingly inefﬁcient. To increase our storage efﬁciency, measured
+in the effective-replication-factor of BLOBs, we examine the underlying access
+patterns of BLOBs and identify temperature zones that include hot BLOBs that
+are accessed frequently and warm BLOBs that are accessed far less often. Our
+overall BLOB storage system is designed to isolate warm BLOBs and enable us to
+use a **specialized warm BLOB** storage system, f4.
+
+* **f4** (20XX-20XX)
+* ... (20XX-20XX)
+
+Steps:
+
+* start with off the shelf, NFS
+* get rid of metadata, reads and POSIX (Haystack)
+* observe and optimize for access pattern, f4 ([OSDI14](https://youtu.be/imlP3lxwGgQ?t=69))
+
 ![](static/ocean.jpg)
 
 ----
@@ -68,7 +106,15 @@ storage machines can perform all metadata lookups in main memory. This choice
 conserves disk operations for reading actual data and thus increases overall
 throughput.
 
-### What is a metadata lookup?
+## Caching has limits
+
+* one photo, one file
+* metadata overhead
+* neither MySQL, hadoop, nor NAS seemed to work for photos
+* build new system, find a better RAM-to-disk ratio
+* caching did not work, because the file metadata and inodes was too much to cache
+
+## What is a metadata lookup?
 
 * [stat](https://man7.org/linux/man-pages/man2/stat.2.html) system call, [IEEE
   Std
@@ -85,7 +131,7 @@ $ tabstat
 > (that's like [sending 1K over
 > 1Gbps](https://gist.github.com/jboner/2841832#file-latency-txt-L9))
 
-### FB use case (2010)
+## FB use case (2010)
 
 * 1B new photos per week (60TB)
 * they generate four versions
@@ -97,7 +143,7 @@ Let's sketch (just guessing):
 * 10mu/access
 * 22h per week spent in metadata lookups; maybe much more as popular photos are requested more than twice
 
-### Access mode, waste
+## Access mode, waste
 
 > data is written once, read often, never modified, and rarely deleted.
 
@@ -114,20 +160,38 @@ That's about 15G/week only for the perms, which the paper says they did not
 need (total stat size would be 500G/week, file metadata amounted for about 1%
 of storage size; stat struct in total was [144b](https://github.com/miku/haystack/blob/9b9ffabac5c9dd5e6f92ed7a8943fa5f65e69ddc/x/cstat/size.c#L1)).
 
-### How many ops per photo?
+## How many ops per photo?
 
 > one (or typically more)
 to translate the filename to an inode number, another to read the inode from
 disk, and a final one to read the file itself. In short, using disk IOs for
 metadata was the limiting factor for our read throughput.
 
-### Goals and Features
+## Goals and Features
 
 * Haystack achieves **high throughput** and **low latency** by requiring **at
   most one disk operation per read** (with metadata in main memory).
 * Redundancy.
 * Efficiency, 28% fewer cost in storage, 4x reads/s.
 * Simple.
+
+## Misc
+
+* optimize RAM/disk ratio (metadata, blob)
+
+> Haystack takes a straight-forward approach:
+it stores multiple photos in a single file and therefore maintains very large
+files.
+
+Three components:
+
+* store (many "volumes", (N) physical, (1) logical - replication)
+* directory (logical to physical mapping, logical volume for each photo)
+* cache (internal CDN)
+
+![](static/haystack3.png)
+
+
 
 ## seaweedfs
 
