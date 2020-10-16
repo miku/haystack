@@ -219,7 +219,7 @@ particular photo without needing disk operations.
 
 Store machine keeps metadata in memory, that is:
 
-* photo id -> (file, offset, size)
+* photo id → (file, offset, size)
 
 That would be about 10MB of RAM per million of photos, or 500MB for 50M photos,
 which might be roughly what 10TB disks would get you (500k/photo).
