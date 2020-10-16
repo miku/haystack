@@ -235,11 +235,10 @@ Some more bits:
 
 > Currently, Haystack uses on average 10 bytes of main memory per photo
 
-On XFS: For comparison, consider that an xfs inode t structure in Linux is 536
-bytes.
+On XFS: For comparison, consider that an `xfs_inode_t` structure in Linux is 536 bytes.
 
 
-## seaweedfs
+# seaweedfs
 
 * is an open source project inspired by the haystack paper
 
@@ -255,14 +254,14 @@ Basic notions:
 
 Metadata overhead for each file is 40 bytes.
 
-* erasure coding (FEC)
-
-Layers
+Additional Layers
 
 * blobs
 * filer (for files and directories)
 * S3, hadoop
 * replication
+
+## SLOC
 
 ```shell
 ===============================================================================
@@ -291,3 +290,363 @@ Layers
  Total                 618       104284        83756         5980        14548
 ===============================================================================
 ```
+
+## Usage
+
+* start master server
+* start volume (e.g. on many nodes)
+
+There are dashboards:
+
+* [http://localhost:9333/](http://localhost:9333/), master
+* [http://localhost:8080/ui/index.html](http://localhost:8080/ui/index.html), volume
+
+Possible to start all components with a single command.
+
+```
+$ /usr/local/bin/weed server -dir /srv/seaweedfs/data -s3 -s3.port 8333 \
+    -volume.max 0 -volume.index=leveldb2 -volume.port 8380 \
+    -master.port 9333 -master.volumeSizeLimitMB 250000 \
+    -filer no \
+    -whiteList 127.0.0.1
+```
+
+Manual flow:
+
+* assign a new id from master server (will lookup writeable volumes, etc)
+* specify replication type for file here
+* get multiple IDs back
+
+```
+$ curl -s http://localhost:9333/dir/assign | jq .
+{
+  "fid": "6,0483b66701",
+  "url": "172.24.235.158:8080",
+  "publicUrl": "172.24.235.158:8080",
+  "count": 1
+}
+```
+
+* upload content to volume server (master server upload also possible, as
+  [convenience](https://github.com/chrislusf/seaweedfs/wiki/Volume-Server-API#upload-file-directly))
+
+```
+$ curl -F file=@static/gopher.jpg http://172.24.235.158:8080/6,0483b66701
+{
+  "name": "gopher.jpg",
+  "size": 2270010,
+  "eTag": "c86be0d211f37662c8ed34f8ff429652"
+}
+```
+
+Open file: [http://172.24.235.158:8080/6,0483b66701](http://172.24.235.158:8080/6,0483b66701).
+
+## Basic API
+
+Cluster status.
+
+```json
+$ curl -s "http://localhost:9333/cluster/status" | jq .
+{
+  "IsLeader": true,
+  "Leader": "172.24.235.158:9333",
+  "MaxVolumeId": 7
+}
+```
+
+Looking up a volume server.
+
+```json
+$ curl -s "http://localhost:9333/dir/lookup?volumeId=7" | jq .
+{
+  "volumeId": "7",
+  "locations": [
+    {
+      "url": "172.24.235.158:8080",
+      "publicUrl": "172.24.235.158:8080"
+    }
+  ]
+}
+```
+
+Volume server status:
+
+```json
+$ curl "http://localhost:8080/status?pretty=y"
+{
+  "DiskStatuses": [
+    {
+      "dir": "/home/tir/code/miku/haystack/tmp/vol-0",
+      "all": 1967397240832,
+      "used": 1273166209024,
+      "free": 694231031808,
+      "percent_free": 35.286774,
+      "percent_used": 64.71323
+    }
+  ],
+  "Version": "30GB 2.03 d155f907",
+  "Volumes": [
+    {
+      "Id": 1,
+      "Size": 3307,
+      "ReplicaPlacement": {
+        "SameRackCount": 0,
+        "DiffRackCount": 0,
+        "DiffDataCenterCount": 0
+      },
+      "Ttl": {
+        "Count": 0,
+        "Unit": 0
+      },
+      "Collection": "",
+      "Version": 3,
+      "FileCount": 1,
+      "DeleteCount": 0,
+      "DeletedByteCount": 0,
+      "ReadOnly": false,
+      "CompactRevision": 0,
+      "ModifiedAtSecond": 0,
+      "RemoteStorageName": "",
+      "RemoteStorageKey": ""
+    },
+    {
+      "Id": 2,
+      "Size": 0,
+      "ReplicaPlacement": {
+        "SameRackCount": 0,
+        "DiffRackCount": 0,
+        "DiffDataCenterCount": 0
+      },
+      "Ttl": {
+        "Count": 0,
+        "Unit": 0
+      },
+      "Collection": "",
+      "Version": 3,
+      "FileCount": 0,
+      "DeleteCount": 0,
+      "DeletedByteCount": 0,
+      "ReadOnly": false,
+      "CompactRevision": 0,
+      "ModifiedAtSecond": 0,
+      "RemoteStorageName": "",
+      "RemoteStorageKey": ""
+    },
+    {
+      "Id": 3,
+      "Size": 0,
+      "ReplicaPlacement": {
+        "SameRackCount": 0,
+        "DiffRackCount": 0,
+        "DiffDataCenterCount": 0
+      },
+      "Ttl": {
+        "Count": 0,
+        "Unit": 0
+      },
+      "Collection": "",
+      "Version": 3,
+      "FileCount": 0,
+      "DeleteCount": 0,
+      "DeletedByteCount": 0,
+      "ReadOnly": false,
+      "CompactRevision": 0,
+      "ModifiedAtSecond": 0,
+      "RemoteStorageName": "",
+      "RemoteStorageKey": ""
+    },
+    {
+      "Id": 4,
+      "Size": 0,
+      "ReplicaPlacement": {
+        "SameRackCount": 0,
+        "DiffRackCount": 0,
+        "DiffDataCenterCount": 0
+      },
+      "Ttl": {
+        "Count": 0,
+        "Unit": 0
+      },
+      "Collection": "",
+      "Version": 3,
+      "FileCount": 0,
+      "DeleteCount": 0,
+      "DeletedByteCount": 0,
+      "ReadOnly": false,
+      "CompactRevision": 0,
+      "ModifiedAtSecond": 0,
+      "RemoteStorageName": "",
+      "RemoteStorageKey": ""
+    },
+    {
+      "Id": 5,
+      "Size": 0,
+      "ReplicaPlacement": {
+        "SameRackCount": 0,
+        "DiffRackCount": 0,
+        "DiffDataCenterCount": 0
+      },
+      "Ttl": {
+        "Count": 0,
+        "Unit": 0
+      },
+      "Collection": "",
+      "Version": 3,
+      "FileCount": 0,
+      "DeleteCount": 0,
+      "DeletedByteCount": 0,
+      "ReadOnly": false,
+      "CompactRevision": 0,
+      "ModifiedAtSecond": 0,
+      "RemoteStorageName": "",
+      "RemoteStorageKey": ""
+    },
+    {
+      "Id": 6,
+      "Size": 2270032,
+      "ReplicaPlacement": {
+        "SameRackCount": 0,
+        "DiffRackCount": 0,
+        "DiffDataCenterCount": 0
+      },
+      "Ttl": {
+        "Count": 0,
+        "Unit": 0
+      },
+      "Collection": "",
+      "Version": 3,
+      "FileCount": 1,
+      "DeleteCount": 0,
+      "DeletedByteCount": 0,
+      "ReadOnly": false,
+      "CompactRevision": 0,
+      "ModifiedAtSecond": 0,
+      "RemoteStorageName": "",
+      "RemoteStorageKey": ""
+    },
+    {
+      "Id": 7,
+      "Size": 0,
+      "ReplicaPlacement": {
+        "SameRackCount": 0,
+        "DiffRackCount": 0,
+        "DiffDataCenterCount": 0
+      },
+      "Ttl": {
+        "Count": 0,
+        "Unit": 0
+      },
+      "Collection": "",
+      "Version": 3,
+      "FileCount": 0,
+      "DeleteCount": 0,
+      "DeletedByteCount": 0,
+      "ReadOnly": false,
+      "CompactRevision": 0,
+      "ModifiedAtSecond": 0,
+      "RemoteStorageName": "",
+      "RemoteStorageKey": ""
+    }
+  ]
+}
+```
+
+## Filer
+
+The filer adds another, optional layer on top, adding directories, via POST, GET.
+
+```
+$ weed filer
+```
+
+* [https://github.com/chrislusf/seaweedfs/wiki/Filer-Server-API](https://github.com/chrislusf/seaweedfs/wiki/Filer-Server-API)
+
+POST creates a dir or file. Simple [web interface as well](http://localhost:8888).
+
+```json
+$ curl -s -H "Accept: application/json" "http://localhost:8888/" | jq .
+{
+  "Path": "",
+  "Entries": [
+    {
+      "FullPath": "/8A6DB1C4-609F-4AF6-A042-67A7FD32BFEA.jpeg",
+      "Mtime": "2020-10-16T18:07:29+02:00",
+      "Crtime": "2020-10-16T18:07:29+02:00",
+      "Mode": 432,
+      "Uid": 1000,
+      "Gid": 1000,
+      "Mime": "image/jpeg",
+      "Replication": "000",
+      "Collection": "",
+      "TtlSec": 0,
+      "UserName": "",
+      "GroupNames": null,
+      "SymlinkTarget": "",
+      "Md5": "pCuk3R6PWY7btCzrXnDv/w==",
+      "FileSize": 2351087,
+      "Extended": null,
+      "chunks": [
+        {
+          "file_id": "2,05ebf3a483",
+          "size": 2351087,
+          "mtime": 1602864449363783000,
+          "e_tag": "a42ba4dd1e8f598edbb42ceb5e70efff",
+          "fid": {
+            "volume_id": 2,
+            "file_key": 5,
+            "cookie": 3958613123
+          }
+        }
+      ],
+      "HardLinkId": null,
+      "HardLinkCounter": 0
+    }
+  ],
+  "Limit": 100,
+  "LastFileName": "8A6DB1C4-609F-4AF6-A042-67A7FD32BFEA.jpeg",
+  "ShouldDisplayLoadMore": false
+}
+```
+
+## S3
+
+```
+$ weed s3
+```
+
+We ran some tests:
+
+* [https://gist.github.com/miku/6f3fee974ba82083325c2f24c912b47b](https://gist.github.com/miku/6f3fee974ba82083325c2f24c912b47b).
+* [https://github.com/internetarchive/sandcrawler/blob/master/proposals/2020_seaweed_s3.md](https://github.com/internetarchive/sandcrawler/blob/master/proposals/2020_seaweed_s3.md)
+
+On a single machine, we got to about 400 puts/s via S3 API. Sustained over 200M
+objects. S3 access at about 170 object/s (peak 700), single machine setup.
+
+## Mount storage
+
+Fuse mount.
+
+```
+$ weed mount -filer=localhost:8888 -dir=store
+```
+
+## Shell
+
+```
+$ weed shell
+```
+
+## Hadoop and Spark
+
+The seaweedfs as a drop in storage layer for HDFS and spark.
+
+## Combined cloud and on-premise setup
+
+* [https://github.com/chrislusf/seaweedfs/wiki/Cloud-Tier](https://github.com/chrislusf/seaweedfs/wiki/Cloud-Tier)
+
+
+# Wrap-Up
+
+* lightweight project
+* an interesting alternative to minio, actively maintained
+
