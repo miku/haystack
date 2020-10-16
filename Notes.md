@@ -321,3 +321,16 @@ Directory has to exist, otherwise panic - maybe a PR?
 * I1016 11:49:09 52917 master.go:142] Start Seaweed Master 30GB 2.03 d155f907 grpc server at 0.0.0.0:19333
 
 
+----
+
+# Misc
+
+## Tracing
+
+* want to instrument code, so I see method call graph as the server run
+
+There is some information on that:
+
+* https://rakyll.org/latency-profiling/
+
+> Instrumentation requires manual labor. Go code cannot be auto-instrumented by intercepting calls.
