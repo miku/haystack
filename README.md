@@ -653,4 +653,7 @@ The seaweedfs as a drop in storage layer for HDFS and spark.
 
 ----
 
-# A toy key value store that uses the "offset, length" pattern: [microblob](https://github.com/miku/microblob).
+> A toy key value store that uses the "offset, length" pattern: [microblob](https://github.com/miku/microblob).
+
+A response to a note from *the architect* - [So what's wrong with 1975
+programming?](http://varnish-cache.org/docs/trunk/phk/notes.html#so-what-s-wrong-with-1975-programming).
