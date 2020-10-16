@@ -242,6 +242,7 @@ On XFS: For comparison, consider that an `xfs_inode_t` structure in Linux is 536
 
 # seaweedfs
 
+* [seaweedfs](https://github.com/chrislusf/seaweedfs), formely known as weedfs
 * is an open source project inspired by the haystack paper
 
 Goals:
