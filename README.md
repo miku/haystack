@@ -37,6 +37,8 @@ are accessed frequently and warm BLOBs that are accessed far less often. Our
 overall BLOB storage system is designed to isolate warm BLOBs and enable us to
 use a **specialized warm BLOB** storage system, f4.
 
+During Haystack time: seemingly about 1500 photo uploads per second (120M/day).
+
 * **f4** (20XX-20XX)
 * ... (20XX-20XX)
 
@@ -191,6 +193,50 @@ Three components:
 
 ![](static/haystack3.png)
 
+Flow:
+
+* user uploads photo
+* server requests a write-enabled logical volume from the directory
+* server assigns ID and uploads data to all physical volumes
+
+Machines can get full, then they are marked as read only.
+
+The Store machines managers multiple physical volumes.
+
+* large files, e.g. 100G, containing millions of photos
+* accessible by logical volume and file offset
+
+> Each Store machine manages multiple physical volumes. Each volume holds
+> millions of photos. For
+concreteness, the reader can think of a physical volume as simply a very large
+file (100 GB) saved as `/hay/haystack_<logical volume id>`. A Store machine can
+access a photo quickly using only the id of the corresponding logical volume
+and the file offset at which the photo resides. This knowledge is the keystone
+of the Haystack design: retrieving the filename, offset, and size for a
+particular photo without needing disk operations.
+
+Store machine keeps metadata in memory, that is:
+
+* photo id -> (file, offset, size)
+
+That would be about 10MB of RAM per million of photos, or 500MB for 50M photos,
+which might be roughly what 10TB disks would get you (500k/photo).
+
+* Mapping kept in memory and can restored after crash
+
+> N.B. delete is a flag; an optimization ("index") may retrieve deleted photos
+> at a certain point (but only once, after which the deleted flag is updated).
+
+* XFS used
+
+Some more bits:
+
+* 25% of photos get deleted, and they seem to delete them during compaction
+
+> Currently, Haystack uses on average 10 bytes of main memory per photo
+
+On XFS: For comparison, consider that an xfs inode t structure in Linux is 536
+bytes.
 
 
 ## seaweedfs
