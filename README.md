@@ -30,7 +30,7 @@ They added a custom system call to the kernel.
 > `open_by_filehandle`, that we added to the kernel (but did not help much)
 
 * **Haystack** (2007-20XX)
-* [Warm BLOB](https://www.usenix.org/system/files/conference/osdi14/osdi14-paper-muralidhar.pdf) (20XX-20XX)
+* f4, [Warm BLOB](https://www.usenix.org/system/files/conference/osdi14/osdi14-paper-muralidhar.pdf) (20XX-20XX)
 
 > As the footprint of BLOBs increases, storing them in
 our traditional storage system, **Haystack** (in prod for 7 year in 2014), is
@@ -43,7 +43,6 @@ use a **specialized warm BLOB** storage system, f4.
 
 During Haystack time: seemingly about 1500 photo uploads per second (120M/day).
 
-* **f4** (20XX-20XX)
 * ... (20XX-20XX)
 
 Steps:
