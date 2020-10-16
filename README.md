@@ -650,3 +650,7 @@ The seaweedfs as a drop in storage layer for HDFS and spark.
 * lightweight project
 * an interesting alternative to minio, actively maintained
 
+
+----
+
+# A toy key value store that uses the "offset, length" pattern: [microblob](https://github.com/miku/microblob).
