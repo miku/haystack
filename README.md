@@ -1,6 +1,6 @@
 # Haystack Object Storage and Go Implementation
 
-> Short Talk as Gophers Leipzig, 2020-10-16, 1900 CEST (remote)
+> Short Talk at Gophers Leipzig, 2020-10-16, 1900 CEST (remote)
 
 ----
 
