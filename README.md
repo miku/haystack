@@ -55,7 +55,7 @@ Steps:
 
 ----
 
-Sidenote: What does a PB of disk space cost today?
+Sidenote: What does a PB of disk space cost today (2020)?
 
 The ([unfortunately discontinued](https://blog.kobol.io/2021/08/25/we-are-pulling-the-plug/))
 [Helios 64 ARM NAS](https://wiki.kobol.io/helios64/intro/) has 5 SATA ports,
