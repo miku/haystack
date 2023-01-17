@@ -64,20 +64,20 @@ maybe around EUR 3K for 80TB. 13 such devices would give yield a PB of storage
 three times (60PB) using low end appliances (ARM, sata) would cost EUR 2.4M
 today.
 
-**Update (2023)**: With a [Zimaboard](https://www.zimaboard.com/) plus [PCI
-SATA](https://shop.zimaboard.com/en-de/products/5-channel-sata-6g-pcie-adapter-host-card-pci-express-x1-to-x4-sata-connector-supports-ahci-fis-ncq-marvell-chipset)
-plus low end 16T HDDs we can get 1PB for *64 disks * $250* + *13 boards * $240*, or for $19120. 60PB then would roughly equate to *60 * $20000*, or $1,200,000. Off-the-self, in 2023, for $20,000,000 you can get an [Exabyte](https://www.backblaze.com/blog/what-is-an-exabyte/).
-
-![](static/assembly_pic13.png)
-
 That is (very) roughly what you would pay for S3 cloud data storage, for a
 month (assuming
 [$32.76/TB/month](https://wasabi.com/blog/on-premises-vs-cloud-storage/) S3).
 
 The [covid19](https://en.wikipedia.org/wiki/COVID-19_pandemic) support paid by the German Government for a single company,
 [TUI](https://www.tagesschau.de/wirtschaft/tui-milliardenhilfe-101.html), 1.8B,
-could pay for: 15 Exabyte of triple replicated storage, or 187GB per person
-(de).
+could pay for: 15 Exabyte of triple replicated storage, or 187GB for every person in Germany.
+
+**Update (2023)**: With a [Zimaboard](https://www.zimaboard.com/) plus [PCI
+SATA](https://shop.zimaboard.com/en-de/products/5-channel-sata-6g-pcie-adapter-host-card-pci-express-x1-to-x4-sata-connector-supports-ahci-fis-ncq-marvell-chipset)
+plus low end 16T HDDs we can get 1PB for *64 disks * $250* + *13 boards * $240*, or for $19120. 60PB then would roughly equate to *60 * $20000*, or $1,200,000. Off-the-self, in 2023, for $20,000,000 you can get an [Exabyte](https://www.backblaze.com/blog/what-is-an-exabyte/).
+
+![](static/assembly_pic13.png)
+
 
 ----
 
