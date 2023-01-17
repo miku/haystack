@@ -64,7 +64,7 @@ maybe around EUR 3K for 80TB. 13 such devices would give yield a PB of storage
 three times (60PB) using low end appliances (ARM, sata) would cost EUR 2.4M
 today.
 
-Update (2023): With a [Zimaboard](https://www.zimaboard.com/) plus [PCI
+**Update (2023)**: With a [Zimaboard](https://www.zimaboard.com/) plus [PCI
 SATA](https://shop.zimaboard.com/en-de/products/5-channel-sata-6g-pcie-adapter-host-card-pci-express-x1-to-x4-sata-connector-supports-ahci-fis-ncq-marvell-chipset)
 plus low end 16T HDDs we can get 1PB for *64 disks * $250* + *13 boards * $240*, or for $19120. 60PB then would roughly equate to *60 * $20000*, or $1,200,000. Off-the-self, in 2023, for $20,000,000 you can get an [Exabyte](https://www.backblaze.com/blog/what-is-an-exabyte/).
 
