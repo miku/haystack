@@ -57,7 +57,7 @@ Steps:
 
 Sidenote: What does a PB of disk space cost today (2020)?
 
-The ([unfortunately discontinued](https://blog.kobol.io/2021/08/25/we-are-pulling-the-plug/))
+The (now [defunkt](https://blog.kobol.io/2021/08/25/we-are-pulling-the-plug/))
 [Helios 64 ARM NAS](https://wiki.kobol.io/helios64/intro/) has 5 SATA ports,
 maybe around EUR 3K for 80TB. 13 such devices would give yield a PB of storage
 (unreplicated), so roughly EUR 40K. Replicating FB 2010 photo storage (20PB)
