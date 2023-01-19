@@ -5,7 +5,7 @@ TARGETS := tabstat size
 all: $(TARGETS)
 
 %: %.c
-	clang-format --style Google -i $^
+	clang-format --style WebKit -i $^
 	CFLAGS=-D_POSIX_C_SOURCE cc -o $@ $^
 
 valgrind: all
