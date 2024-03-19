@@ -161,9 +161,8 @@ Some waste.
 > For the Photos application most of this metadata, such as permissions, is unused
 
 For example, `stat` will return `st_mode` which is of type `mode_t` which is
-probably [4
-bytes](https://stackoverflow.com/questions/9602685/why-does-mode-t-use-4-byte)
-or your native CPU word size - even though it mostly (boolean) flags.
+probably [4 bytes](https://stackoverflow.com/questions/9602685/why-does-mode-t-use-4-byte)
+or your native CPU word size - even though it is mostly (boolean) flags.
 
 That's about 15G/week only for the perms, which the paper says they did not
 need (total stat size would be 500G/week, file metadata amounted for about 1%
