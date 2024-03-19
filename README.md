@@ -90,7 +90,7 @@ plus low end 16T HDDs we can get 1PB for *64 disks * $250* + *13 boards * $240*,
 
 It is live and serving thumbnails:
 
-[![](https://blobs.fatcat.wiki/thumbnail/pdf/4f/06/4f06e3c755776ff2fed8bdf9e533737989c9912e.180px.jpg)](https://scholar-qa.archive.org/)
+[![](https://blobs.fatcat.wiki/thumbnail/pdf/4f/06/4f06e3c755776ff2fed8bdf9e533737989c9912e.180px.jpg)](https://scholar.archive.org/)
 
 Currently running on a single server:
 
