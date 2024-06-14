@@ -76,6 +76,13 @@ could pay for: 15 Exabyte of triple replicated storage, or 187GB for every perso
 SATA](https://shop.zimaboard.com/en-de/products/5-channel-sata-6g-pcie-adapter-host-card-pci-express-x1-to-x4-sata-connector-supports-ahci-fis-ncq-marvell-chipset)
 plus low end 16T HDDs we can get 1PB for *64 disks * $250* + *13 boards * $240*, or for $19120. 60PB then would roughly equate to *60 * $20000*, or $1,200,000. Off-the-self, in 2023, for $20,000,000 you can get an [Exabyte](https://www.backblaze.com/blog/what-is-an-exabyte/).
 
+**Update (2024)**: CWWK has a [N100 board](https://cwwk.net/collections/frontpage/products/12th-gen-n100-2x-intel-i226-v-2-5g-magic-mini-pc-with-new-ways-to-play?variant=45193565012200)
+out, that's [much more performant with the same TDP](https://www.cpubenchmark.net/compare/5157vs2907/Intel-N100-vs-Intel-Celeron-N3450)
+than the N3450 and also supports
+[32GB](https://www.cnx-software.com/2024/02/26/magic-computer-fanless-alder-lake-n-mini-pc-pcie-x8-slot/),
+for about the same price - $210.85. The 1PB storage variant with 13 boards
+would then yield 416 GB DDR5 RAM in total.
+
 ![](static/assembly_pic13.png)
 
 
